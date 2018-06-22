@@ -5,12 +5,21 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.NoBorders(smartBorders)
+import XMonad.Layout.PerWorkspace
+import XMonad.Layout.SimplestFloat
 import XMonad.Util.EZConfig(additionalKeys)
 
+myManageHook = composeAll . concat $
+              [ [ className =? c --> doFloat | c <- cFloats ]
+              , [ title =? t --> doFloat | t <- tFloats ]]
+              where cFloats = [ ]
+                    tFloats = [ "Firefox Preferences", "Downloads", "Add-on", "Rename", "create"]
+
+
 myConfig = ewmh def
-         { manageHook = ( isFullscreen --> doFullFloat) <+>  manageDocks <+> manageHook def
+         { manageHook = myManageHook <+> manageHook def
          , handleEventHook = handleEventHook def <+> fullscreenEventHook
-         , layoutHook = smartBorders (avoidStruts $ layoutHook def)
+         , layoutHook = smartBorders $ onWorkspace "float" simplestFloat $ (avoidStruts $ layoutHook def)
          , terminal = "urxvt"
          , borderWidth = 0
          , modMask = mod4Mask  -- modkey is now windows key
