@@ -30,6 +30,7 @@ myConfig = ewmh def
          , ((mod4Mask, xK_Left), prevWS)
          , ((mod4Mask, xK_Right), nextWS)
          , ((mod4Mask, xK_r), spawn "rofi -show run")
+         , ((mod4Mask, xK_j), spawn "jisho-popup.sh")
          ]
 
 
