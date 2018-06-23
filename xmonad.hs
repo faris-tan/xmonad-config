@@ -13,7 +13,7 @@ myManageHook = composeAll . concat $
               [ [ className =? c --> doFloat | c <- cFloats ]
               , [ title =? t --> doFloat | t <- tFloats ]]
               where cFloats = [ ]
-                    tFloats = [ "Firefox Preferences", "Downloads", "Add-on", "Rename", "create"]
+                    tFloats = [ "Firefox Preferences", "Downloads", "Add-on", "Rename", "create", "jisho"]
 
 
 myConfig = ewmh def
